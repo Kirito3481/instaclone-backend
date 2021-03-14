@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import client from "../client";
 
 export default {
@@ -43,7 +44,11 @@ export default {
           error: "Incorrect password.",
         };
       }
-      // 토큰을 생성후 유저에게 전달
+      const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+      return {
+        ok: true,
+        token,
+      };
     },
   },
 };
