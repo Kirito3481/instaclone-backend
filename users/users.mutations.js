@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import client from "../client";
 
 export default {
@@ -11,9 +12,17 @@ export default {
           OR: [{ username }, { email }],
         },
       });
-
-      // hash password
-      // 저장 후 User 반환
+      console.log(existingUser);
+      const uglyPassword = await bcrypt.hash(password, 10);
+      return client.user.create({
+        data: {
+          username,
+          email,
+          firstName,
+          lastName,
+          password: uglyPassword,
+        },
+      });
     },
   },
 };
