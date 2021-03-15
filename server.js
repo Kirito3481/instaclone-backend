@@ -4,6 +4,10 @@ import schema from "./schema";
 
 const server = new ApolloServer({
   schema,
+  context: {
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE1NzgyNjczfQ.09uC22I5qrzbJ9JjcCLqds5Va-Vl-ziKqAEFXMA4KQ4",
+  },
 });
 
 const PORT = process.env.PORT;
